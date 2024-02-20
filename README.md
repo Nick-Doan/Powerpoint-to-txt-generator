@@ -5,3 +5,4 @@ For the "Open Folder" option, ensure the folder only has powerpoint files or els
 
 Libaries needed:
 customtkinter
+python-pptx
