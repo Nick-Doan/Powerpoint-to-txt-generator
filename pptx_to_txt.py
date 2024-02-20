@@ -9,13 +9,15 @@ def extract_text_from_pptx(file_path):
     try:
         presentation = Presentation(file_path)
         text = ""
-        for slide in presentation.slides:
+        for i, slide in enumerate(presentation.slides, start=1):
+            text+= f"Slide {i}:\n"
             for shape in slide.shapes:
                 if hasattr(shape, "text"):
-                    text += shape.text + "\n"
+                    text+= shape.text +"\n"
+            text+= "\n" #add a new line between slides
         return text
     except Exception as e:
-        messagebox.showerror("Error", f"An error occurred: {str(e)}")
+        messagebox.showerror("Error", f"AN error occurred: {str(e)}")
         return None
     
 #open file function
@@ -42,7 +44,7 @@ def save_text_to_file(text):
     file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
     if file_path:
         try:
-            with open(file_path, "w") as f:
+            with open(file_path, "w", encoding="utf-8") as f:
                 f.write(text)
             messagebox.showinfo("Success", "Text saved successfully!")
         except Exception as e:
